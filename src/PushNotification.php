@@ -18,7 +18,7 @@ class PushNotification
     protected $servicesList = [
         'gcm' => Gcm::class,
         'apn' => Apn::class,
-        'fcm' => FcmV1::class
+        'fcm' => Fcm::class
     ];
 
     /**
@@ -165,20 +165,6 @@ class PushNotification
     public function send()
     {
         $this->service->send($this->deviceTokens, $this->message);
-
-        return $this;
-    }
-
-    /**
-     * @param $topic
-     * @param $isCondition
-     * @return $this
-     */
-    public function sendByTopic($topic, $isCondition = false)
-    {
-        if ($this->service instanceof Fcm) {
-            $this->service->sendByTopic($topic, $this->message, $isCondition);
-        }
 
         return $this;
     }
