@@ -66,7 +66,7 @@ class Fcm extends Gcm
 
         // Update url
         $this->setProjectId($this->config['projectId']);
-        $this->setJsonFile($this->config['$jsonFile']);
+        $this->setJsonFile($this->config['jsonFile']);
     }
 
     /**
