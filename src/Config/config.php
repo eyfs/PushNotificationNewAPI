@@ -17,7 +17,7 @@ return [
         'priority' => 'normal',
         'dry_run' => false,
         'projectId' => 'my-project-id',
-        'jsonFile' => __DIR__ . '/fcmCertificates/file.json',
+        'jsonFile' => __DIR__ . '/fcmCredentials/file.json',
         // Optional: Default Guzzle request options for each FCM request
         // See https://docs.guzzlephp.org/en/stable/request-options.html
         'guzzle' => [],

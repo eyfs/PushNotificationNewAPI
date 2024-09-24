@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Log;
 
 class Fcm extends Gcm
 {
@@ -66,7 +67,7 @@ class Fcm extends Gcm
 
         // Update url
         $this->setProjectId($this->config['projectId']);
-        $this->setJsonFile($this->config['$jsonFile']);
+        $this->setJsonFile($this->config['jsonFile']);
     }
 
     /**
@@ -94,15 +95,21 @@ class Fcm extends Gcm
     {
         // FCM v1 does not allows multiple devices at once
 
+        Log::info("FCM SEND CALLED");
+        Log::info("FCM deviceTokens: " . print_r($deviceTokens, true));
         $headers = $this->addRequestHeaders();
-        $jsonData = ['message' => $this->buildMessage($message)];
+        Log::info("FCM HEADERS: " . print_r($headers, true));
+        $jsonData = $message;
 
         $feedbacks = [];
 
         foreach ($deviceTokens as $deviceToken) {
+            Log::info("DeviceToken: {$deviceToken}");
             try {
                 $jsonData['message']['token'] = $deviceToken;
+                Log::info("FCM MESSAGE: " . print_r($jsonData, true));
 
+                Log::info("URL: " . $this->url);
                 $result = $this->client->post(
                     $this->url,
                     [
@@ -111,6 +118,7 @@ class Fcm extends Gcm
                     ]
                 );
 
+                Log::info("FCM RESULT: " . print_r($result, true));
                 $json = $result->getBody();
 
                 $feedbacks[] = json_decode($json, false, 512, JSON_BIGINT_AS_STRING);
@@ -157,6 +165,7 @@ class Fcm extends Gcm
                 $accessToken = $googleClient->fetchAccessTokenWithAssertion();
 
                 $oauthToken = $accessToken['access_token'];
+                Log::info("GetOauthToken - oauthToken: {$oauthToken}");
 
                 return $oauthToken;
             }
