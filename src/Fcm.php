@@ -150,7 +150,7 @@ class Fcm extends Gcm
                 Log::info("ERROR RESPONSE: " . print_r($e, true));
                 $response = ['success' => false, 'error' => $e->getMessage()];
                 $feedbacks[] = json_decode(json_encode($response));
-			}
+            }
 
             $this->feedback = $feedbacks;
         }
