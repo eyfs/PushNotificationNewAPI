@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @see https://github.com/Edujugon/PushNotification
  */
@@ -15,7 +16,8 @@ return [
     'fcm' => [
         'priority' => 'normal',
         'dry_run' => false,
-        'apiKey' => 'My_ApiKey',
+        'projectId' => 'my-project-id',
+        'jsonFile' => __DIR__ . '/fcmCredentials/file.json',
         // Optional: Default Guzzle request options for each FCM request
         // See https://docs.guzzlephp.org/en/stable/request-options.html
         'guzzle' => [],
