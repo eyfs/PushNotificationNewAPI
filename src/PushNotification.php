@@ -18,7 +18,8 @@ class PushNotification
     protected $servicesList = [
         'gcm' => Gcm::class,
         'apn' => Apn::class,
-        'fcm' => Fcm::class
+        'fcm' => Fcm::class,
+        'fcm-tap-3' => FcmTap3::class
     ];
 
     /**
